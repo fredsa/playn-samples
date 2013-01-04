@@ -19,6 +19,8 @@ import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 import static playn.core.PlayN.pointer;
 
+import com.badlogic.gdx.utils.GdxNativesLoader;
+
 import playn.core.PlayN;
 import playn.core.GroupLayer;
 import playn.core.Image;
@@ -50,6 +52,9 @@ public class PeasDemo extends Demo {
 
   @Override
   public void init() {
+    // make sure our GDX box2d native library is loaded
+    GdxNativesLoader.load();
+
     // load and show our background image
     Image bgImage = assets().getImage("peas/images/bg.png");
     bgLayer = graphics().createImageLayer(bgImage);

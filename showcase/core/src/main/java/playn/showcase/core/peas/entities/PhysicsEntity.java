@@ -15,7 +15,7 @@
  */
 package playn.showcase.core.peas.entities;
 
-import org.jbox2d.dynamics.Body;
+import com.badlogic.gdx.physics.box2d.Body;
 
 public interface PhysicsEntity {
 

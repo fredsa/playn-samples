@@ -15,16 +15,16 @@
  */
 package playn.showcase.core.peas;
 
-import org.jbox2d.callbacks.ContactImpulse;
-import org.jbox2d.callbacks.ContactListener;
-import org.jbox2d.callbacks.DebugDraw;
-import org.jbox2d.collision.Manifold;
-import org.jbox2d.collision.shapes.PolygonShape;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.World;
-import org.jbox2d.dynamics.contacts.Contact;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Stack;
 
 import playn.core.CanvasImage;
-import playn.core.DebugDrawBox2D;
+// import playn.core.DebugDrawBox2D;
 import playn.core.GroupLayer;
 import static playn.core.PlayN.graphics;
 
@@ -55,8 +55,8 @@ public class PeaWorld implements ContactListener {
   private HashMap<Body, PhysicsEntity> bodyEntityLUT = new HashMap<Body, PhysicsEntity>();
   private Stack<Contact> contacts = new Stack<Contact>();
 
-  private static boolean showDebugDraw = false;
-  private DebugDrawBox2D debugDraw;
+  // private static boolean showDebugDraw = false;
+  // private DebugDrawBox2D debugDraw;
 
   public PeaWorld(GroupLayer scaledLayer) {
     staticLayerBack = graphics().createGroupLayer();
@@ -67,7 +67,7 @@ public class PeaWorld implements ContactListener {
     scaledLayer.add(staticLayerFront);
 
     // create the physics world
-    Vec2 gravity = new Vec2(0.0f, 10.0f);
+    Vector2 gravity = new Vector2(0.0f, 10.0f);
     world = new World(gravity, true);
     world.setWarmStarting(true);
     world.setAutoClearForces(true);
@@ -75,34 +75,34 @@ public class PeaWorld implements ContactListener {
 
     // create the ground
     Body ground = world.createBody(new BodyDef());
-    PolygonShape groundShape = new PolygonShape();
-    groundShape.setAsEdge(new Vec2(0, height), new Vec2(width, height));
+    EdgeShape groundShape = new EdgeShape();
+    groundShape.set(0, height, width, height);
     ground.createFixture(groundShape, 0.0f);
 
     // create the walls
     Body wallLeft = world.createBody(new BodyDef());
-    PolygonShape wallLeftShape = new PolygonShape();
-    wallLeftShape.setAsEdge(new Vec2(0, 0), new Vec2(0, height));
+    EdgeShape wallLeftShape = new EdgeShape();
+    wallLeftShape.set(0, 0, 0, height);
     wallLeft.createFixture(wallLeftShape, 0.0f);
     Body wallRight = world.createBody(new BodyDef());
-    PolygonShape wallRightShape = new PolygonShape();
-    wallRightShape.setAsEdge(new Vec2(width, 0), new Vec2(width, height));
+    EdgeShape wallRightShape = new EdgeShape();
+    wallRightShape.set(width, 0, width, height);
     wallRight.createFixture(wallRightShape, 0.0f);
 
-    if (showDebugDraw) {
-      CanvasImage image = graphics().createImage((int) (width / PeasDemo.physUnitPerScreenUnit),
-                                                 (int) (height / PeasDemo.physUnitPerScreenUnit));
-      graphics().rootLayer().add(graphics().createImageLayer(image));
-      debugDraw = new DebugDrawBox2D();
-      debugDraw.setCanvas(image);
-      debugDraw.setFlipY(false);
-      debugDraw.setStrokeAlpha(150);
-      debugDraw.setFillAlpha(75);
-      debugDraw.setStrokeWidth(2.0f);
-      debugDraw.setFlags(DebugDraw.e_shapeBit | DebugDraw.e_jointBit | DebugDraw.e_aabbBit);
-      debugDraw.setCamera(0, 0, 1f / PeasDemo.physUnitPerScreenUnit);
-      world.setDebugDraw(debugDraw);
-    }
+    // if (showDebugDraw) {
+    //   CanvasImage image = graphics().createImage((int) (width / PeasDemo.physUnitPerScreenUnit),
+    //                                              (int) (height / PeasDemo.physUnitPerScreenUnit));
+    //   graphics().rootLayer().add(graphics().createImageLayer(image));
+    //   debugDraw = new DebugDrawBox2D();
+    //   debugDraw.setCanvas(image);
+    //   debugDraw.setFlipY(false);
+    //   debugDraw.setStrokeAlpha(150);
+    //   debugDraw.setFillAlpha(75);
+    //   debugDraw.setStrokeWidth(2.0f);
+    //   debugDraw.setFlags(DebugDraw.e_shapeBit | DebugDraw.e_jointBit | DebugDraw.e_aabbBit);
+    //   debugDraw.setCamera(0, 0, 1f / PeasDemo.physUnitPerScreenUnit);
+    //   world.setDebugDraw(debugDraw);
+    // }
   }
 
   public void update(float delta) {
@@ -115,10 +115,10 @@ public class PeaWorld implements ContactListener {
   }
 
   public void paint(float delta) {
-    if (showDebugDraw) {
-      debugDraw.getCanvas().clear();
-      world.drawDebugData();
-    }
+    // if (showDebugDraw) {
+    //   debugDraw.getCanvas().clear();
+    //   world.drawDebugData();
+    // }
     for (Entity e : entities) {
       e.paint(delta);
     }
@@ -138,8 +138,8 @@ public class PeaWorld implements ContactListener {
       Contact contact = contacts.pop();
 
       // handle collision
-      PhysicsEntity entityA = bodyEntityLUT.get(contact.m_fixtureA.m_body);
-      PhysicsEntity entityB = bodyEntityLUT.get(contact.m_fixtureB.m_body);
+      PhysicsEntity entityA = bodyEntityLUT.get(contact.getFixtureA().getBody());
+      PhysicsEntity entityB = bodyEntityLUT.get(contact.getFixtureB().getBody());
 
       if (entityA != null && entityB != null) {
         if (entityA instanceof PhysicsEntity.HasContactListener) {

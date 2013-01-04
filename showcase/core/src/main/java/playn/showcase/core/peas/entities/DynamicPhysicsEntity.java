@@ -15,9 +15,9 @@
  */
 package playn.showcase.core.peas.entities;
 
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.World;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 
 import playn.showcase.core.peas.PeaWorld;
 
@@ -64,7 +64,7 @@ public abstract class DynamicPhysicsEntity extends Entity implements PhysicsEnti
   }
 
   public void setLinearVelocity(float x, float y) {
-    body.setLinearVelocity(new Vec2(x, y));
+    body.setLinearVelocity(new Vector2(x, y));
   }
 
   public void setAngularVelocity(float w) {
@@ -74,7 +74,7 @@ public abstract class DynamicPhysicsEntity extends Entity implements PhysicsEnti
   @Override
   public void setPos(float x, float y) {
     super.setPos(x, y);
-    getBody().setTransform(new Vec2(x, y), getBody().getAngle());
+    getBody().setTransform(new Vector2(x, y), getBody().getAngle());
     prevX = x;
     prevY = y;
   }

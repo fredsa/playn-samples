@@ -15,13 +15,13 @@
  */
 package playn.showcase.core.peas.entities;
 
-import org.jbox2d.collision.shapes.PolygonShape;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
-import org.jbox2d.dynamics.World;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.World;
 
 import playn.core.Image;
 import playn.showcase.core.peas.PeaWorld;
@@ -38,21 +38,21 @@ public class BlockRightRamp extends Block {
   Body initPhysicsBody(World world, float x, float y, float angle) {
     FixtureDef fixtureDef = new FixtureDef();
     BodyDef bodyDef = new BodyDef();
-    bodyDef.type = BodyType.STATIC;
-    bodyDef.position = new Vec2(0, 0);
+    bodyDef.type = BodyType.StaticBody;
+    bodyDef.position.set(0, 0);
     Body body = world.createBody(bodyDef);
 
     PolygonShape polygonShape = new PolygonShape();
-    Vec2[] polygon = new Vec2[3];
-    polygon[0] = new Vec2(-getWidth()/2f, -getHeight()/2f + getTopOffset());
-    polygon[1] = new Vec2(getWidth()/2f, getHeight()/2f);
-    polygon[2] = new Vec2(-getWidth()/2f, getHeight()/2f);
-    polygonShape.set(polygon, polygon.length);
+    Vector2[] polygon = new Vector2[3];
+    polygon[0] = new Vector2(-getWidth()/2f, -getHeight()/2f + getTopOffset());
+    polygon[1] = new Vector2(getWidth()/2f, getHeight()/2f);
+    polygon[2] = new Vector2(-getWidth()/2f, getHeight()/2f);
+    polygonShape.set(polygon);
     fixtureDef.shape = polygonShape;
     fixtureDef.friction = 0.1f;
     fixtureDef.restitution = 0.9f;
     body.createFixture(fixtureDef);
-    body.setTransform(new Vec2(x, y), angle);
+    body.setTransform(new Vector2(x, y), angle);
     return body;
   }
 

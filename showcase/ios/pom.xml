@@ -79,6 +79,7 @@
             <copyDll>bin/IKVM.OpenJDK.Core.dll</copyDll>
             <copyDll>bin/IKVM.OpenJDK.Util.dll</copyDll>
             <copyDll>bin/IKVM.OpenJDK.Text.dll</copyDll>
+            <copyDll>bin/libikvm-natives.a</copyDll>
           </copyDlls>
         </configuration>
       </plugin>

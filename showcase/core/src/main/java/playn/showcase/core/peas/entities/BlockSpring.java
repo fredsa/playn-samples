@@ -15,15 +15,15 @@
  */
 package playn.showcase.core.peas.entities;
 
-import org.jbox2d.collision.shapes.PolygonShape;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
-import org.jbox2d.dynamics.World;
-import org.jbox2d.dynamics.joints.MouseJoint;
-import org.jbox2d.dynamics.joints.MouseJointDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
+import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 
 import static playn.core.PlayN.graphics;
 import playn.core.Image;
@@ -43,10 +43,10 @@ public class BlockSpring extends Entity implements PhysicsEntity {
 
     // add the spring joint
     MouseJointDef mjd = new MouseJointDef();
-    mjd.bodyA = world.getBodyList();
+    mjd.bodyA = world.getBodies().next();
     body = initPhysicsBody(world, x, y, angle);
     mjd.bodyB = getBody();
-    mjd.target.set(new Vec2(x, y));
+    mjd.target.set(new Vector2(x, y));
     mjd.maxForce = 40f * getBody().getMass();
     mjd.dampingRatio = 0.2f;
     mj = (MouseJoint) world.createJoint(mjd);
@@ -81,22 +81,22 @@ public class BlockSpring extends Entity implements PhysicsEntity {
   Body initPhysicsBody(World world, float x, float y, float angle) {
     FixtureDef fixtureDef = new FixtureDef();
     BodyDef bodyDef = new BodyDef();
-    bodyDef.type = BodyType.DYNAMIC;
-    bodyDef.position = new Vec2(0, 0);
+    bodyDef.type = BodyType.DynamicBody;
+    bodyDef.position.set(0, 0);
     Body body = world.createBody(bodyDef);
 
     PolygonShape polygonShape = new PolygonShape();
-    Vec2[] polygon = new Vec2[4];
-    polygon[0] = new Vec2(-getWidth() / 2f, -getHeight() / 2f + getTopOffset());
-    polygon[1] = new Vec2(getWidth() / 2f, -getHeight() / 2f + getTopOffset());
-    polygon[2] = new Vec2(getWidth() / 2f, polygon[0].y + getSpringBoxHeight());
-    polygon[3] = new Vec2(-getWidth() / 2f, polygon[1].y + getSpringBoxHeight());
-    polygonShape.set(polygon, polygon.length);
+    Vector2[] polygon = new Vector2[4];
+    polygon[0] = new Vector2(-getWidth() / 2f, -getHeight() / 2f + getTopOffset());
+    polygon[1] = new Vector2(getWidth() / 2f, -getHeight() / 2f + getTopOffset());
+    polygon[2] = new Vector2(getWidth() / 2f, polygon[0].y + getSpringBoxHeight());
+    polygon[3] = new Vector2(-getWidth() / 2f, polygon[1].y + getSpringBoxHeight());
+    polygonShape.set(polygon);
     fixtureDef.shape = polygonShape;
     fixtureDef.friction = 0.1f;
     fixtureDef.restitution = 1.4f;
     body.createFixture(fixtureDef);
-    body.setTransform(new Vec2(x, y), angle);
+    body.setTransform(new Vector2(x, y), angle);
     return body;
   }
 
@@ -128,8 +128,8 @@ public class BlockSpring extends Entity implements PhysicsEntity {
   @Override
   public void setPos(float x, float y) {
     if (getBody() != null && layerBase != null) {
-      getBody().setTransform(new Vec2(x, y), getBody().getAngle());
-      mj.setTarget(new Vec2(x, y - 0 * getSpringBoxHeight()));
+      getBody().setTransform(new Vector2(x, y), getBody().getAngle());
+      mj.setTarget(new Vector2(x, y - 0 * getSpringBoxHeight()));
       layerBase.setTranslation(x, y);
       layer.setTranslation(x, y);
     }

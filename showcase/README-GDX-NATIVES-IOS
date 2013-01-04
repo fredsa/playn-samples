@@ -1,0 +1,11 @@
+To use the GDX native bindings on iOS, you need to:
+
+1. Create ios/lib
+
+2. Download libgdx-0.9.8.zip (or newer, presumably)
+
+3. Copy into ios/lib:
+
+   gdx-0.9.8/ios/gdx.dll
+   gdx-0.9.8/ios/gdx.dll.mdb
+   gdx-0.9.8/ios/libgdx.a

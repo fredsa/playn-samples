@@ -15,8 +15,8 @@
  */
 package playn.showcase.core.peas.entities;
 
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.World;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 
 import playn.showcase.core.peas.PeaWorld;
 

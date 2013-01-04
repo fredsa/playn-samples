@@ -14,8 +14,16 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <repositories>
+    <repository>
+      <id>gdx-nightlies</id>
+      <url>http://libgdx.badlogicgames.com/nightlies/maven</url>
+    </repository>
+  </repositories>
+
   <properties>
     <playn.version>1.6</playn.version>
+    <gdx.version>0.9.9-SNAPSHOT</gdx.version>
   </properties>
 
   <modules>

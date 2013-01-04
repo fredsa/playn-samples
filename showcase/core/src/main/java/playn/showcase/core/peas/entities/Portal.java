@@ -15,13 +15,13 @@
  */
 package playn.showcase.core.peas.entities;
 
-import org.jbox2d.collision.shapes.PolygonShape;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
-import org.jbox2d.dynamics.World;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.World;
 
 import playn.core.Image;
 import playn.showcase.core.peas.PeaWorld;
@@ -42,25 +42,25 @@ public class Portal extends StaticPhysicsEntity implements PhysicsEntity.HasCont
   Body initPhysicsBody(World world, float x, float y, float angle) {
     FixtureDef fixtureDef = new FixtureDef();
     BodyDef bodyDef = new BodyDef();
-    bodyDef.type = BodyType.STATIC;
-    bodyDef.position = new Vec2(0, 0);
+    bodyDef.type = BodyType.StaticBody;
+    bodyDef.position.set(0, 0);
     Body body = world.createBody(bodyDef);
 
     // height of the portal contact box
     float boxHeight = getHeight() / 12f;
     float boxWidth = getWidth() * 0.75f;
     PolygonShape polygonShape = new PolygonShape();
-    Vec2[] polygon = new Vec2[4];
-    polygon[0] = new Vec2(-boxWidth/2f, getHeight()/2f - boxHeight);
-    polygon[1] = new Vec2(boxWidth/2f, getHeight()/2f - boxHeight);
-    polygon[2] = new Vec2(boxWidth/2f, getHeight()/2f);
-    polygon[3] = new Vec2(-boxWidth/2f, getHeight()/2f);
-    polygonShape.set(polygon, polygon.length);
+    Vector2[] polygon = new Vector2[4];
+    polygon[0] = new Vector2(-boxWidth/2f, getHeight()/2f - boxHeight);
+    polygon[1] = new Vector2(boxWidth/2f, getHeight()/2f - boxHeight);
+    polygon[2] = new Vector2(boxWidth/2f, getHeight()/2f);
+    polygon[3] = new Vector2(-boxWidth/2f, getHeight()/2f);
+    polygonShape.set(polygon);
     fixtureDef.shape = polygonShape;
     fixtureDef.friction = 0.1f;
     fixtureDef.restitution = 0.8f;
     body.createFixture(fixtureDef);
-    body.setTransform(new Vec2(x, y), angle);
+    body.setTransform(new Vector2(x, y), angle);
     return body;
   }
 
@@ -110,14 +110,14 @@ public class Portal extends StaticPhysicsEntity implements PhysicsEntity.HasCont
     } else {
       hysteresis = maxHysteresis;
     }
-    Vec2 pos = contactEntity.getBody().getPosition();
+    Vector2 pos = contactEntity.getBody().getPosition();
     float ang = contactEntity.getBody().getAngle();
-    Vec2 vel = contactEntity.getBody().getLinearVelocity();
+    Vector2 vel = contactEntity.getBody().getLinearVelocity();
 
-    Vec2 posDiff = pos.sub(getBody().getPosition());
+    Vector2 posDiff = pos.sub(getBody().getPosition());
     float angDiff = other.getBody().getAngle() - getBody().getAngle();
 
-    Vec2 newPos = rotate(posDiff, angDiff).add(other.getBody().getPosition());
+    Vector2 newPos = rotate(posDiff, angDiff).add(other.getBody().getPosition());
     float newAng = ang + angDiff;
     if (contactEntity instanceof DynamicPhysicsEntity) {
       DynamicPhysicsEntity dynamic = (DynamicPhysicsEntity) contactEntity;
@@ -126,12 +126,12 @@ public class Portal extends StaticPhysicsEntity implements PhysicsEntity.HasCont
     } else {
       contactEntity.getBody().setTransform(newPos, newAng);
     }
-    Vec2 newVel = rotate(vel, angDiff);
+    Vector2 newVel = rotate(vel, angDiff);
     contactEntity.getBody().setLinearVelocity(newVel);
   }
 
-  private Vec2 rotate(Vec2 vec, float theta) {
-    Vec2 ret = new Vec2();
+  private Vector2 rotate(Vector2 vec, float theta) {
+    Vector2 ret = new Vector2();
     float cTheta = (float)Math.cos(theta);
     float sTheta = (float)Math.sin(theta);
     ret.x = vec.x * cTheta - vec.y * sTheta;
