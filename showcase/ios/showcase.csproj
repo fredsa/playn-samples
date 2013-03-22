@@ -51,7 +51,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>True</MtouchDebug>
     <MtouchProfiling>True</MtouchProfiling>
-    <MtouchLink>Full</MtouchLink>
+    <MtouchLink>None</MtouchLink>
     <MtouchI18n />
     <MtouchArch>ARMv7</MtouchArch>
     <MtouchExtraArgs>-nosymbolstrip -nostrip -cxx -gcc_flags "-L${ProjectDir}/bin -likvm-natives -L${ProjectDir}/lib -lgdx -force_load ${ProjectDir}/lib/libgdx.a -force_load ${ProjectDir}/bin/libikvm-natives.a"</MtouchExtraArgs>
@@ -64,7 +64,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchLink>Full</MtouchLink>
+    <MtouchLink>None</MtouchLink>
     <MtouchI18n />
     <MtouchArch>ARMv7</MtouchArch>
     <MtouchExtraArgs>-nosymbolstrip -nostrip -cxx -gcc_flags "-L${ProjectDir}/bin -likvm-natives -L${ProjectDir}/lib -lgdx -force_load ${ProjectDir}/lib/libgdx.a -force_load ${ProjectDir}/bin/libikvm-natives.a"</MtouchExtraArgs>
