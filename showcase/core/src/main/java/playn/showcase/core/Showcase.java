@@ -16,7 +16,7 @@
 package playn.showcase.core;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -37,7 +37,10 @@ import playn.showcase.core.text.TextDemo;
  */
 public class Showcase implements Game {
 
-  private final Set<Key> backKeys = EnumSet.of(Key.ESCAPE, Key.BACK);
+  private final Set<Key> backKeys = new HashSet<Key>(); {
+    backKeys.add(Key.ESCAPE);
+    backKeys.add(Key.BACK);
+  }
   private final Demo menuDemo = new Menu(this);
   private Demo activeDemo;
   private long activeStamp;
