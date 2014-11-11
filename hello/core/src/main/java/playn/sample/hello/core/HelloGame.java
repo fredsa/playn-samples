@@ -42,6 +42,7 @@ public class HelloGame extends Game.Default {
     // create and add background image layer
     Image bgImage = assets().getImage("images/bg.png");
     ImageLayer bgLayer = graphics().createImageLayer(bgImage);
+    bgLayer.setSize(graphics().screenWidth(), graphics().screenHeight());
     graphics().rootLayer().add(bgLayer);
 
     // create a group layer to hold the peas
