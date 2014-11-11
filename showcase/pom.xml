@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.googlecode.playn</groupId>
     <artifactId>playn-project</artifactId>
-    <version>1.8.5</version>
+    <version>1.9-SNAPSHOT</version>
   </parent>
 
   <artifactId>playn-showcase</artifactId>
@@ -15,7 +15,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <playn.version>1.8.5</playn.version>
+    <playn.version>1.9-SNAPSHOT</playn.version>
   </properties>
 
   <modules>
@@ -36,6 +36,14 @@
     <profile>
       <id>ios</id>
       <modules><module>ios</module></modules>
+    </profile>
+    <profile>
+      <id>robosim</id>
+      <modules><module>robovm</module></modules>
+    </profile>
+    <profile>
+      <id>robodev</id>
+      <modules><module>robovm</module></modules>
     </profile>
     <profile>
       <id>html</id>
