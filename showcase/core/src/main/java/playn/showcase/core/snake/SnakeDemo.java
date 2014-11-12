@@ -46,8 +46,9 @@ public class SnakeDemo extends Demo
     graphics().rootLayer().add(layer);
 
     // create and add background image layer
-    Image bgImage = assets().getImage("sprites/bg.png");
+    Image bgImage = assets().getImage("background.png");
     ImageLayer bgLayer = graphics().createImageLayer(bgImage);
+    bgLayer.setSize(graphics().screenWidth(), graphics().screenHeight());
     bgLayer.setDepth(-1);
     layer.add(bgLayer);
 

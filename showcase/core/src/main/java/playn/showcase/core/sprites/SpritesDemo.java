@@ -47,8 +47,9 @@ public class SpritesDemo extends Demo {
     ding = assets().getSound("sprites/ding");
 
     // create and add background image layer
-    Image bgImage = assets().getImage("sprites/bg.png");
+    Image bgImage = assets().getImage("background.png");
     ImageLayer bgLayer = graphics().createImageLayer(bgImage);
+    bgLayer.setSize(graphics().screenWidth(), graphics().screenHeight());
     layer.add(bgLayer);
 
     // add a listener for pointer (mouse, touch) input

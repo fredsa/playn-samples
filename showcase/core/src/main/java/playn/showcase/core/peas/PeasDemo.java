@@ -51,8 +51,9 @@ public class PeasDemo extends Demo {
   @Override
   public void init() {
     // load and show our background image
-    Image bgImage = assets().getImage("peas/images/bg.png");
+    Image bgImage = assets().getImage("background.png");
     bgLayer = graphics().createImageLayer(bgImage);
+    bgLayer.setSize(graphics().screenWidth(), graphics().screenHeight());
     graphics().rootLayer().add(bgLayer);
 
     // create our world layer (scaled to "world space")

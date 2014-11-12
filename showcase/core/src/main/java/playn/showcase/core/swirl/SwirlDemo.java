@@ -37,25 +37,18 @@ public class SwirlDemo extends Demo {
 
   @Override
   public void init() {
-    pointer().setListener(new Pointer.Adapter() {
-      @Override
-      public void onPointerStart(Pointer.Event event) {
-        doStuff();
-      }
-    });
-
-    Image background = assets().getImage("swirl/background.png");
-    Image catgirl = assets().getImage("swirl/girlcat.png");
+    Image background = assets().getImage("background.png");
+    bgLayer = graphics().createImageLayer(background);
+    bgLayer.setSize(graphics().screenWidth(), graphics().screenHeight());
+    bgLayer.setDepth(-1);
+    graphics().rootLayer().add(bgLayer);
 
     groupLayer = graphics().createGroupLayer();
     groupLayer.setOrigin(128, 128);
     groupLayer.transform().translate(256, 256);
     graphics().rootLayer().add(groupLayer);
 
-    bgLayer = graphics().createImageLayer(background);
-    bgLayer.setDepth(-1);
-    graphics().rootLayer().add(bgLayer);
-
+    Image catgirl = assets().getImage("swirl/girlcat.png");
     layer0 = graphics().createImageLayer(catgirl);
     layer1 = graphics().createImageLayer(catgirl);
     layer2 = graphics().createImageLayer(catgirl);
@@ -84,9 +77,6 @@ public class SwirlDemo extends Demo {
     bgLayer.destroy();
     bgLayer = null;
     layer0 = layer1 = layer2 = layer3 = null;
-  }
-
-  private void doStuff() {
   }
 
   int elapsed;
