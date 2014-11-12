@@ -58,6 +58,13 @@ public abstract class Demo
   }
 
   /**
+   * Called when the device has rotated to a new orientation.
+   */
+  public void didRotate () {
+    // nada
+  }
+
+  /**
    * Because the showcase uses a few keys to move between demos, a demo must not register a
    * keyboard listener directly, but instead return its listener from this method. This allows the
    * showcase to intercept the keys it needs and to pass on other key events to the demo.

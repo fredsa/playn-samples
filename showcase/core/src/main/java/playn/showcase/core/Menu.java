@@ -53,6 +53,7 @@ public class Menu extends Demo
   private final Showcase showcase;
 
   private Interface iface;
+  private Root root;
   private GroupLayer layer;
 
   public Menu (Showcase showcase) {
@@ -73,7 +74,7 @@ public class Menu extends Demo
     iface = new Interface();
 
     // create our demo interface
-    Root root = iface.createRoot(AxisLayout.vertical().gap(15), SimpleStyles.newSheet());
+    root = iface.createRoot(AxisLayout.vertical().gap(15), SimpleStyles.newSheet());
     root.setSize(graphics().width(), graphics().height());
     root.addStyles(Style.BACKGROUND.is(Background.solid(0xFF99CCFF).inset(5)));
     layer.add(root.layer);
@@ -102,9 +103,15 @@ public class Menu extends Demo
   }
 
   @Override
+  public void didRotate () {
+    root.setSize(graphics().width(), graphics().height());
+  }
+
+  @Override
   public void shutdown() {
     if (iface != null) {
       pointer().setListener(null);
+      root = null;
       iface = null;
     }
     layer.destroy();

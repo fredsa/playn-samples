@@ -63,6 +63,10 @@ public class Showcase extends Game.Default {
     this.deviceService = deviceService;
   }
 
+  public void didRotate() {
+    activeDemo.didRotate();
+  }
+
   public boolean shouldExitOnBack() {
     // the BACK button will get procesesd by Android immediately *after* we move to the main menu,
     // so we want to debounce things so only if you press back after you're already on the main
