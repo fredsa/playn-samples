@@ -47,7 +47,7 @@
     <dependency>
       <groupId>com.threerings</groupId>
       <artifactId>tripleplay</artifactId>
-      <version>${playn.version}</version>
+      <version>${tripleplay.version}</version>
       <classifier>sources</classifier>
     </dependency>
 
