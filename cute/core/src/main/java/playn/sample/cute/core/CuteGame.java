@@ -25,7 +25,6 @@ import playn.core.Key;
 import playn.core.Keyboard;
 import playn.core.Pointer;
 import playn.core.Surface;
-import playn.core.SurfaceLayer;
 import playn.core.util.Callback;
 import static playn.core.PlayN.*;
 
